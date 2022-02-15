@@ -83,9 +83,9 @@ const Tab = styled.span<{ isActive: boolean }>`
 const BackButton = styled.div`
   position: absolute;
   right:35vmax;
-  border: solid 1px;
+  border: solid 1px ${(props) => props.theme.bgColor};;
   background-color: none;
-  color:white;
+  color:${(props) => props.theme.textColor};;
 `;
 
 interface RouteParams {
@@ -175,7 +175,6 @@ function Coin() {
   //   })();
   // }, [coinId]);
   const loading = infoLoading || tickersLoading;
-  console.log(tickersData?.quotes.USD.price);
   
   return (
     <Container>

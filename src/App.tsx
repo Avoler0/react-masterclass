@@ -1,6 +1,10 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { darkTheme,lightTheme } from "./theme";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -20,7 +24,7 @@ main, menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
   padding: 0;
-  border: 0;
+  border: 0; 
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
@@ -63,13 +67,15 @@ a{
 `;
 
 function App() { 
+  const isDark = useRecoilValue(isDarkAtom);
   return (
-    <>
-    <GlobalStyle/>
-    <Router />
-    <ReactQueryDevtools initialIsOpen={true} />
+  <>
+    <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+      <GlobalStyle/>
+      <Router />
+      <ReactQueryDevtools initialIsOpen={true} />
+    </ThemeProvider>
   </>
   )
 }
-
 export default App;
